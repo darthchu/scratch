@@ -1,8 +1,9 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [new MiniCssExtractPlugin(), new CleanWebpackPlugin()],
   entry: path.join(__dirname, '/client/index.js'),
   output: {
     path: path.resolve(__dirname, 'build'),
