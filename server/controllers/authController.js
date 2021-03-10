@@ -26,7 +26,7 @@ authController.create = (req, res, next) => {
     const query = `
         INSERT INTO users(username, password)
         VALUES ($1, $2)
-        RETURNING username, _id`;
+        RETURNING username, _id as id`;
 
     //SAVE TO DB
     db.query(query, [username, hash]).then((data) => {

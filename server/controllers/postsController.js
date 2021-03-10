@@ -14,6 +14,7 @@ postsController.getAllPosts = (req, res, next) => {
 
 postsController.createPost = (req, res, next) => {
   const { user_id, title, body } = req.body;
+  console.log(req.body);
 
   const query = `
         INSERT INTO posts(user_id, title, body)
