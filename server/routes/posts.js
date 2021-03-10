@@ -8,6 +8,10 @@ router.post('/', postsController.createPost, (req, res) => {
   res.status(200).json(res.locals.newPost);
 });
 
+router.get('/user', authController.verifyUser, postsController.getUserPosts, (req, res) => {
+  res.status(200).json(res.locals.userPosts);
+})
+
 router.get(
   '/',
   authController.verifyUser,

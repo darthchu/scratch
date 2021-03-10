@@ -12,6 +12,9 @@ const postsReducer = (state = initialState, action) => {
       return { ...state, posts: action.payload };
       //   return { ...state, posts: [{ title: 'hello', body: 'i am a post' }] };
     }
+    case types.GET_MY_POSTS : {
+      return { ...state, posts: action.payload };
+    }
     case types.UPDATE_TITLE: {
       return { ...state, newPostTitle: action.payload };
     }

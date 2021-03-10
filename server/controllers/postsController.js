@@ -12,6 +12,24 @@ postsController.getAllPosts = (req, res, next) => {
   });
 };
 
+postsController.getUserPosts = (req, res, next) => {
+  const { id } = res.locals.user;
+  const query = `
+          SELECT u.username, p.body, p.title
+          FROM users u, posts p
+          WHERE u._id = $1 AND p.user_id = $1
+          ORDER BY p._id DESC`;
+  
+  db.query(query, [id])
+    .then((data) => {
+      res.locals.userPosts = data.rows;
+      return next();
+    })
+    .catch((err) => {
+      return next(err);
+    })
+}
+
 postsController.createPost = (req, res, next) => {
   const { user_id, title, body } = req.body;
   console.log(req.body);

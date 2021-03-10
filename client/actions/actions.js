@@ -14,6 +14,15 @@ export const getPosts = () => (dispatch) => {
     });
 };
 
+export const getMyPosts = () => (dispatch) => {
+  fetch('/posts/user')
+    .then((res) => res.json())
+    .then((data) => {
+      console.log('users posts: ', data);
+      dispatch({type: types.GET_MY_POSTS, payload: data});
+    })
+}
+
 export const savePost = (title, body, id) => (dispatch) => {
   const reqBody = {
     title,
