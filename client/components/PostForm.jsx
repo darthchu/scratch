@@ -28,7 +28,8 @@ class PostForm extends Component {
     return (
       <center className="PostForm">
         <form
-          onSubmit={(e) =>
+          onSubmit={(e) =>{
+            console.log(this.props);
             this.props.handleSubmit(
               e,
               this.props.newPostTitle,
@@ -36,6 +37,7 @@ class PostForm extends Component {
               this.props.user.id
             )
           }
+        }
         >
           <input
             placeholder="Add a title"

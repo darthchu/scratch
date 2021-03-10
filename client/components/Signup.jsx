@@ -55,6 +55,7 @@ const Signup = (props) => {
         //   //console.log(321321, data);
         // })
         .then((data) => {
+          console.log('signup data: ', data);
           props.authenticate(data);
           props.history.push('/');
         })
