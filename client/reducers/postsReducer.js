@@ -19,6 +19,7 @@ const postsReducer = (state = initialState, action) => {
       return { ...state, newPostBody: action.payload };
     }
     case types.SAVE_POST: {
+      console.log("SAVE_POST", action.payload);
       const newPostList = [action.payload, ...state.posts];
       return { ...state, posts: newPostList };
     }

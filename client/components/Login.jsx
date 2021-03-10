@@ -48,7 +48,7 @@ const Login = (props) => {
       })
         .then((resp) => resp.json())
         // .then((data) => {
-        //   //console.log(321321, data);
+        //   console.log(321321, data);
         // })
         .then((data) => {
           console.log('data from login is: ', data);
