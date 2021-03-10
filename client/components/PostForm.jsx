@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateTitle, updateBody, savePost, getMyPosts } from '../actions/actions';
+import { updateTitle, updateBody, savePost, getMyPosts, getPosts } from '../actions/actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -23,6 +23,10 @@ const mapDispatchToProps = (dispatch) => {
     handleGetUserPosts: (e) => {
       e.preventDefault();
       dispatch(getMyPosts());
+    },
+    handleGetAllPosts: (e) => {
+      e.preventDefault();
+      dispatch(getPosts());
     }
   };
 };
@@ -37,17 +41,17 @@ class PostForm extends Component {
             console.log(this.props);
             this.props.handleSubmit(
               e,
-              this.props.newPostTitle,
+              this.props.user.username,
               this.props.newPostBody,
               this.props.user.id
             )
           }
         }
         >
-          <input
+          {/* <input
             placeholder="Add a title"
             onChange={(e) => this.props.updateTitle(e.target.value)}
-          />
+          /> */}
           <br />
           <textarea
             placeholder="Add a body"
@@ -55,7 +59,8 @@ class PostForm extends Component {
           />
           <br />
           <button type="submit">Add Post</button>
-          <button onClick={(e) => {this.props.handleGetUserPosts(e)}}>See my posts</button>
+          <button onClick={(e) => {this.props.handleGetUserPosts(e)}}>See my Posts</button>
+          <button onClick={(e) => {this.props.handleGetAllPosts(e)}}>See all Posts</button>
         </form>
       </center>
     );
