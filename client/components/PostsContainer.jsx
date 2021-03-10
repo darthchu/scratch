@@ -7,6 +7,7 @@ import Navbar from './Navbar.jsx';
 
 const mapStateToProps = (state) => {
   //
+  console.log('POSTS CONTAINER SCRATCH: ', state.posts);
   return { posts: state.posts, userId: state.scratch.user.id };
 };
 
@@ -28,7 +29,7 @@ class PostsContainer extends Component {
   renderPosts() {
     if (Array.isArray(this.props.posts.posts)) {
       return this.props.posts.posts.map((post, i) => (
-        <Post
+         <Post
           key={`Post ${i}`}
           title={post.title}
           body={post.body}

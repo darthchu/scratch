@@ -15,7 +15,7 @@ postsController.getAllPosts = (req, res, next) => {
 postsController.getUserPosts = (req, res, next) => {
   const { id } = res.locals.user;
   const query = `
-          SELECT u.username, p.body, p.title
+          SELECT u.username, p.body, p.title, p.user_id
           FROM users u, posts p
           WHERE u._id = $1 AND p.user_id = $1
           ORDER BY p._id DESC`;

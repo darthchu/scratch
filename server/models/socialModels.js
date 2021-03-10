@@ -1,9 +1,8 @@
 const { Pool } = require('pg');
+require('dotenv').config();
 
-const PG_URI =
-  'postgres://bvabvsgu:CkpMTkGs2WVtRX6ei7OF9HYT0BYZcyjP@kashin.db.elephantsql.com:5432/bvabvsgu';
-  // 'postgres://yvigeiaa:Qpe4Y1GB8ZP-Rg-fKaLfbYM4Lin6Ce7J@ziggy.db.elephantsql.com:5432/yvigeiaa';
 
+const PG_URI = process.env.NODE_ENV === 'testing' ? process.env.JEST_TEST_URI : process.env.PG_URI;
 const pool = new Pool({
   connectionString: PG_URI,
 });
