@@ -6,8 +6,7 @@ import PostForm from './PostForm.jsx';
 import Navbar from './Navbar.jsx';
 
 const mapStateToProps = (state) => {
-  //
-  return { posts: state.posts, userId: state.scratch.user.id };
+  return { posts: state.posts, userId: state.scratch.user.id, username: state.scratch.user.username };
 };
 
 // const mapDispatchToProps = (dispatch) => {
@@ -30,7 +29,8 @@ class PostsContainer extends Component {
       return this.props.posts.posts.map((post, i) => (
         <Post
           key={`Post ${i}`}
-          title={post.title}
+          // title={post.title}
+          username={this.props.username}
           body={post.body}
           userId={post.user_id}
           styling={post.user_id === this.props.userId ? 'MyPost' : null}
