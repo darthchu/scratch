@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateTitle, updateBody, savePost } from '../actions/actions';
+import { updateTitle, updateBody, savePost, getMyPosts } from '../actions/actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -20,8 +20,13 @@ const mapDispatchToProps = (dispatch) => {
 
       dispatch(savePost(title, body, id));
     },
+    handleGetUserPosts: (e) => {
+      e.preventDefault();
+      dispatch(getMyPosts());
+    }
   };
 };
+
 
 class PostForm extends Component {
   render() {
@@ -50,6 +55,7 @@ class PostForm extends Component {
           />
           <br />
           <button type="submit">Add Post</button>
+          <button onClick={(e) => {this.props.handleGetUserPosts(e)}}>See my posts</button>
         </form>
       </center>
     );
