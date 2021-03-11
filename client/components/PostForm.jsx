@@ -56,6 +56,8 @@ class PostForm extends Component {
               'textPost'
             )
             socket.emit('new post', `emitting from PostForm: ${this.props.newPostBody}`);
+            // reset textarea after submitting
+            document.getElementById('textArea').value = '';
           }
         }
         >
@@ -64,8 +66,8 @@ class PostForm extends Component {
             onChange={(e) => this.props.updateTitle(e.target.value)}
           /> */}
           <br />
-          <textarea
-            placeholder="Add a body"
+          <textarea id="textArea"
+            placeholder="Add your message"
             onChange={(e) => this.props.updateBody(e.target.value)}
           />
           <br />
