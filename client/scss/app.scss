@@ -1,3 +1,7 @@
+@import "colors";
+@import "posts";
+@import "inputcontainer";
+
 * {
   margin: 0;
   padding: 0;
@@ -13,13 +17,13 @@ html {
 }
 
 body {
-  background: #99b898;
+  background: $background-color;
 }
 
 .Navbar {
   height: 50px;
   width: 100vw;
-  background-color: #5e705d;
+  background-color: $nav-background;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -50,7 +54,7 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 2rem;
-  color: #2a363b;
+  color: $background-color;
 
   input {
     margin: 10px;
@@ -72,7 +76,7 @@ body {
     margin-left: 25px;
   }
   button {
-    background-color: #424d41;
+    background-color: $button-background;
     color: whitesmoke;
     border: none;
     padding: 8px 20px;
@@ -86,81 +90,6 @@ body {
   button:hover {
     cursor: pointer;
   }
-}
-
-.PostForm {
-  flex-grow: 1;
-  background: #99b898;
-  z-index: 5;
-  padding-top: 15px;
-
-  button {
-    background-color: #424d41;
-    color: whitesmoke;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 8px;
-    font-size: 1.5rem;
-    margin-left: 35px;
-    margin-right: 25px;
-    margin: 10px;
-  }
-  button:focus {
-    outline: none;
-  }
-  button:hover {
-    cursor: pointer;
-  }
-  textarea {
-    border: none;
-    width: 70vw;
-    resize: none;
-
-    border-radius: 3px;
-    height: 70px;
-    padding: 10px;
-    font-size: 1.5rem;
-    background: #d7ffd6;
-  }
-  textarea:focus {
-    outline: none;
-  }
-  input {
-    border: none;
-    width: 70vw;
-    background: #d7ffd6;
-
-    border-radius: 3px;
-    height: 30px;
-    padding: 10px;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  input:focus {
-    outline: none;
-  }
-}
-
-.allPosts {
-  max-height: 500px;
-}
-
-.PostsContainer {
-  display: flex;
-  flex-direction:column ;
-  margin-top: 20px;
-  color: #2a363b;
-  width: 70vw;
-}
-
-.MyPost {
-  color: rgb(98, 98, 189);
-}
-
-.Post {
-  text-align: left;
-  margin-bottom: 15px;
-  font-size: 1.5rem;
 }
 
 .SignUpHeader {

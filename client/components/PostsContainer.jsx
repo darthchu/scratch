@@ -33,25 +33,27 @@ class PostsContainer extends Component {
   }
 
   componentDidMount() {
-     this.props.getPosts();
-     const socket = socketIOClient('http://localhost:3000');
-     socket.on('new post', () => {
-       console.log('I heard you, geez');
-       this.props.getPosts()
-   })
-}
-
+    this.props.getPosts();
+    const socket = socketIOClient('http://localhost:3000');
+    socket.on('new post', () => {
+      console.log('I heard you, geez');
+      this.props.getPosts();
+    });
+  }
 
   renderPosts() {
     if (Array.isArray(this.props.posts.posts)) {
+      const username = this.props.user.username;
       return this.props.posts.posts.map((post, i) => {
         let currPost;
+        let title = `${post.title}:`;
+        if (post.title === username) title = '';
         if (post.type === 'gif') {
           currPost = (
             <Post
               key={`Post ${i}`}
-              title={post.title}
-              body={<iframe src={`${post.body}`} style={{"border": "none"}} />}
+              title={title}
+              body={<iframe src={`${post.body}`} style={{ border: 'none' }} />}
               userId={post.user_id}
               styling={post.user_id === this.props.userId ? 'MyPost' : null}
             />
@@ -60,7 +62,7 @@ class PostsContainer extends Component {
           currPost = (
             <Post
               key={`Post ${i}`}
-              title={post.title}
+              title={title}
               body={post.body}
               userId={post.user_id}
               styling={post.user_id === this.props.userId ? 'MyPost' : null}
@@ -73,19 +75,20 @@ class PostsContainer extends Component {
   }
 
   render() {
-
     return (
       <center>
         <Navbar />
         <center className="PostsContainer">
           <div className="allPosts">{this.renderPosts()}</div>
+        </center>
+        <div className="InputContainer">
           <PostForm />
           <Giphy
             visible={this.props.giphyVisible}
             handleGifPost={this.props.handleGifPost}
             user={this.props.user}
           />
-        </center>
+        </div>
       </center>
     );
   }

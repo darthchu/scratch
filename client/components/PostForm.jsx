@@ -69,7 +69,7 @@ class PostForm extends Component {
             onChange={(e) => this.props.updateBody(e.target.value)}
           />
           <br />
-          <button type="submit">Add Post</button>
+          <button className="submitPost" type="submit">Add Post</button>
           <button onClick={(e) => {this.props.handleToggleVisibility(e, this.props.visible)}}>Giphy</button>
           <button onClick={(e) => {this.props.handleGetUserPosts(e)}}>See my Posts</button>
           <button onClick={(e) => {this.props.handleGetAllPosts(e)}}>See all Posts</button>

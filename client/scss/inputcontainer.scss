@@ -1,0 +1,49 @@
+//just for giphy container
+.InputContainer{
+  position: relative;
+  width: 70vw;
+
+  .PostForm {
+    margin-top: 10px;
+    flex-grow: 1;
+    background: $background-color;
+    z-index: 5;
+    padding-top: 15px;
+    position: relative;
+    width: 70vw;
+    
+
+    button {
+      background-color: $button-background;
+      color: whitesmoke;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 1.5rem;
+      margin-left: 35px;
+      margin-right: 25px;
+      margin: 10px;
+    }
+    button:focus {
+      outline: none;
+    }
+    button:hover {
+      cursor: pointer;
+    }
+    textarea {
+      border: none;
+      width: 70vw;
+      resize: none;
+
+      border-radius: 3px;
+      height: 70px;
+      padding: 10px;
+      font-size: 1.5rem;
+      background: $input-background;
+    }
+    textarea:focus {
+      outline: none;
+    }
+  } 
+}
+
