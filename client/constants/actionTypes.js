@@ -1,4 +1,5 @@
 export const AUTHENTICATE = 'AUTHENTICATE';
+export const GIPHY = 'GIPHY';
 
 export const GET_POSTS = 'GET_POSTS';
 export const GET_MY_POSTS = 'GET_MY_POSTS';

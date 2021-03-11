@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateTitle, updateBody, savePost, getMyPosts, getPosts } from '../actions/actions';
+import { updateTitle, updateBody, savePost, getMyPosts, getPosts, giphyVisible } from '../actions/actions';
 
 const mapStateToProps = (state) => {
   return {
     newPostTitle: state.posts.newPostTitle,
     newPostBody: state.posts.newPostBody,
     user: state.scratch.user,
+    visible: state.scratch.giphyVisible
   };
 };
 
@@ -14,11 +15,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateTitle: (value) => dispatch(updateTitle(value)),
     updateBody: (value) => dispatch(updateBody(value)),
-    handleSubmit: (e, title, body, id) => {
+    handleSubmit: (e, title, body, id, type) => {
       e.preventDefault();
       if (!title || !body) return;
 
-      dispatch(savePost(title, body, id));
+      dispatch(savePost(title, body, id, type));
     },
     handleGetUserPosts: (e) => {
       e.preventDefault();
@@ -27,6 +28,11 @@ const mapDispatchToProps = (dispatch) => {
     handleGetAllPosts: (e) => {
       e.preventDefault();
       dispatch(getPosts());
+    },
+    handleToggleVisibility: (e, visiblility) => {
+      e.preventDefault();
+      console.log('POSTFORM VISIBLE CHECK: ', visiblility);
+      dispatch(giphyVisible());
     }
   };
 };
@@ -43,7 +49,8 @@ class PostForm extends Component {
               e,
               this.props.user.username,
               this.props.newPostBody,
-              this.props.user.id
+              this.props.user.id,
+              'textPost'
             )
           }
         }
@@ -59,6 +66,7 @@ class PostForm extends Component {
           />
           <br />
           <button type="submit">Add Post</button>
+          <button onClick={(e) => {this.props.handleToggleVisibility(e, this.props.visible)}}>Giphy</button>
           <button onClick={(e) => {this.props.handleGetUserPosts(e)}}>See my Posts</button>
           <button onClick={(e) => {this.props.handleGetAllPosts(e)}}>See all Posts</button>
         </form>

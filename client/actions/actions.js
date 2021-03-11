@@ -5,6 +5,10 @@ export const authenticate = (isAuthenticated) => ({
   payload: isAuthenticated,
 });
 
+export const giphyVisible = () => ({
+  type: types.GIPHY
+});
+
 export const getPosts = () => (dispatch) => {
   fetch('/posts')
     .then((res) => res.json())
@@ -23,11 +27,12 @@ export const getMyPosts = () => (dispatch) => {
     })
 }
 
-export const savePost = (title, body, id) => (dispatch) => {
+export const savePost = (title, body, id, type) => (dispatch) => {
   const reqBody = {
     title,
     body,
     user_id: id,
+    type
   };
 
   fetch('/posts', {

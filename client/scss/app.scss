@@ -45,7 +45,7 @@ body {
 }
 
 .Login {
-  height: 70vh;
+  // height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,10 +89,7 @@ body {
 }
 
 .PostForm {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  flex-grow: 1;
   background: #99b898;
   z-index: 5;
   padding-top: 15px;
@@ -144,7 +141,13 @@ body {
   }
 }
 
+.allPosts {
+  max-height: 500px;
+}
+
 .PostsContainer {
+  display: flex;
+  flex-direction:column ;
   margin-top: 20px;
   color: #2a363b;
   width: 70vw;

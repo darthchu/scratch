@@ -7,6 +7,7 @@ import Signup from './components/Signup.jsx';
 import PostsContainer from './components/PostsContainer.jsx';
 import FeedLink from './components/FeedLink.jsx';
 
+
 const mapStateToProps = (state) => ({
   user: state.scratch.user,
 });

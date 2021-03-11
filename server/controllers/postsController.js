@@ -31,15 +31,15 @@ postsController.getUserPosts = (req, res, next) => {
 }
 
 postsController.createPost = (req, res, next) => {
-  const { user_id, title, body } = req.body;
+  const { user_id, title, body, type } = req.body;
   console.log(req.body);
 
   const query = `
-        INSERT INTO posts(user_id, title, body)
-        VALUES($1, $2, $3)
+        INSERT INTO posts(user_id, title, body, type)
+        VALUES($1, $2, $3, $4)
         RETURNING *`;
 
-  db.query(query, [user_id, title, body]).then((data) => {
+  db.query(query, [user_id, title, body, type]).then((data) => {
     res.locals.newPost = data.rows[0];
     return next();
   });
