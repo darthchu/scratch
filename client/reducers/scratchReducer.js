@@ -3,6 +3,7 @@ import * as types from '../constants/actionTypes';
 
 const initialState = {
   user: null,
+  giphyVisible: false
 };
 
 const scratchReducer = (state = initialState, action) => {
@@ -16,7 +17,13 @@ const scratchReducer = (state = initialState, action) => {
         user: action.payload,
       };
     }
-
+    case types.GIPHY: {
+      console.log('GIPHY REDUCER: ', state.giphyVisible);
+      return {
+        ...state,
+        giphyVisible: !state.giphyVisible
+      }
+    }
     default: {
       return state;
     }

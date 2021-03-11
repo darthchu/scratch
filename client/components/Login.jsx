@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Navbar from './Navbar.jsx';
 
+
 // Custom hook for handling input boxes
 // saves us from creating onChange handlers for them individually
 const useInput = (init) => {
