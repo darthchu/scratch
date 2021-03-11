@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateTitle, updateBody, savePost, getMyPosts, getPosts, giphyVisible } from '../actions/actions';
+import socketIOClient from 'socket.io-client';
 
 const mapStateToProps = (state) => {
   return {
@@ -39,11 +40,13 @@ const mapDispatchToProps = (dispatch) => {
 
 
 class PostForm extends Component {
+
   render() {
     return (
       <center className="PostForm">
         <form
           onSubmit={(e) =>{
+            var socket= io()
             console.log(this.props);
             this.props.handleSubmit(
               e,
@@ -52,6 +55,7 @@ class PostForm extends Component {
               this.props.user.id,
               'textPost'
             )
+            socket.emit('new post', `emitting from PostForm: ${this.props.newPostBody}`);
           }
         }
         >
