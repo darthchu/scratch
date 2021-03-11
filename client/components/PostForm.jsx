@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateTitle, updateBody, savePost, getMyPosts, getPosts, giphyVisible } from '../actions/actions';
+import {
+  updateTitle,
+  updateBody,
+  savePost,
+  getMyPosts,
+  getPosts,
+  giphyVisible,
+} from '../actions/actions';
 import socketIOClient from 'socket.io-client';
 
 const mapStateToProps = (state) => {
@@ -8,7 +15,7 @@ const mapStateToProps = (state) => {
     newPostTitle: state.posts.newPostTitle,
     newPostBody: state.posts.newPostBody,
     user: state.scratch.user,
-    visible: state.scratch.giphyVisible
+    visible: state.scratch.giphyVisible,
   };
 };
 
@@ -34,19 +41,17 @@ const mapDispatchToProps = (dispatch) => {
       e.preventDefault();
       console.log('POSTFORM VISIBLE CHECK: ', visiblility);
       dispatch(giphyVisible());
-    }
+    },
   };
 };
 
-
 class PostForm extends Component {
-
   render() {
     return (
       <center className="PostForm">
         <form
-          onSubmit={(e) =>{
-            var socket= io()
+          onSubmit={(e) => {
+            var socket = io();
             console.log(this.props);
             this.props.handleSubmit(
               e,
@@ -54,28 +59,73 @@ class PostForm extends Component {
               this.props.newPostBody,
               this.props.user.id,
               'textPost'
-            )
-            socket.emit('new post', `emitting from PostForm: ${this.props.newPostBody}`);
+            );
+            socket.emit(
+              'new post',
+              `emitting from PostForm: ${this.props.newPostBody}`
+            );
             // reset textarea after submitting
             document.getElementById('textArea').value = '';
-          }
-        }
+          }}
         >
           {/* <input
             placeholder="Add a title"
             onChange={(e) => this.props.updateTitle(e.target.value)}
           /> */}
           <br />
-          <textarea id="textArea"
+          <textarea
+            id="textArea"
             placeholder="Add your message"
             onChange={(e) => this.props.updateBody(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                var socket = io();
+                console.log(this.props);
+                this.props.handleSubmit(
+                  e,
+                  this.props.user.username,
+                  this.props.newPostBody,
+                  this.props.user.id,
+                  'textPost'
+                );
+                socket.emit(
+                  'new post',
+                  `emitting from PostForm: ${this.props.newPostBody}`
+                );
+                // reset textarea after submitting
+                document.getElementById('textArea').value = '';
+              }
+            }}
           />
           <br />
-          <button type="submit">Add Post</button>
-          <button onClick={(e) => {this.props.handleToggleVisibility(e, this.props.visible)}}>Giphy</button>
-          <button onClick={(e) => {this.props.handleGetUserPosts(e)}}>See my Posts</button>
-          <button onClick={(e) => {this.props.handleGetAllPosts(e)}}>See all Posts</button>
+          <button className="submitPost" type="submit">
+            Add Post
+          </button>
+          <button
+            className="giphyToggle"
+            onClick={(e) => {
+              this.props.handleToggleVisibility(e, this.props.visible);
+            }}
+          >
+            Giphy
+          </button>
         </form>
+        <div className="getPostsButtons">
+          <button
+            onClick={(e) => {
+              this.props.handleGetUserPosts(e);
+            }}
+          >
+            See my Posts
+          </button>
+          <button
+            onClick={(e) => {
+              this.props.handleGetAllPosts(e);
+            }}
+          >
+            See all Posts
+          </button>
+        </div>
       </center>
     );
   }
