@@ -25,14 +25,19 @@ class PostsContainer extends Component {
 
   componentDidMount() {
      this.props.getPosts();
+     const socket = socketIOClient('http://localhost:3000');
+     socket.on('new post', () => {
+       console.log('I heard you, geez');
+       this.props.getPosts()
+   })
 }
 
 componentDidUpdate() {
-  const socket = socketIOClient('http://localhost:3000');
-  socket.on('new post', () => {
-    console.log('I heard you, geez');
-    this.props.getPosts()
-})
+//   const socket = socketIOClient('http://localhost:3000');
+//   socket.on('new post', () => {
+//     console.log('I heard you, geez');
+//     this.props.getPosts()
+// })
 }
 
   renderPosts() {
@@ -51,7 +56,7 @@ componentDidUpdate() {
 
   render() {
 
-    const socket = socketIOClient('http://localhost:3000');
+  //  const socket = socketIOClient('http://localhost:3000');
 
     return (
       <center>

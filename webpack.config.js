@@ -14,7 +14,7 @@ module.exports = {
     publicPath: '/build/',
     proxy: [
       {
-        context: ['/auth', '/secret', '/posts', '/socket.io'],
+        context: ['/auth', '/secret', '/posts', '/socket.io/'],
         target: 'http://localhost:3000',
       },
     ],
