@@ -119,7 +119,7 @@ const Signup = (props) => {
           </div>
           <div className="signup">
             <Link to="/" className="link">
-              Login
+              Cancel
             </Link>
             <button type="button" className="btnMain" onClick={SignupUser}>
               Sign Up

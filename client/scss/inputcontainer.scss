@@ -2,13 +2,10 @@
 .InputContainer{
   position: relative;
   width: 70vw;
+  margin-top: 10px;
 
   .PostForm {
-    margin-top: 10px;
-    flex-grow: 1;
     background: $background-color;
-    z-index: 5;
-    padding-top: 15px;
     position: relative;
     width: 70vw;
     
@@ -20,10 +17,9 @@
       padding: 8px 20px;
       border-radius: 8px;
       font-size: 1.5rem;
-      margin-left: 35px;
-      margin-right: 25px;
-      margin: 10px;
+      margin: 5px 10px 5px 0px;
     }
+
     button:focus {
       outline: none;
     }
@@ -31,18 +27,36 @@
       cursor: pointer;
     }
     textarea {
-      border: none;
-      width: 70vw;
-      resize: none;
 
-      border-radius: 3px;
-      height: 70px;
+      border: 1px solid $border-color; 
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgb(150, 150, 150);
+      width: 100%;
+      height: 100%;
+      resize: none;
       padding: 10px;
       font-size: 1.5rem;
       background: $input-background;
     }
     textarea:focus {
       outline: none;
+    }
+
+    .submitPost {
+      position: absolute;
+      top: 26px;
+      right: 0px
+    }
+
+    .giphyToggle {
+      position: absolute;
+      top: 26px;
+      right: 105px;
+    }
+
+    .getPostsButtons {
+      display: flex;;
+      justify-content: flex-start;
     }
   } 
 }
