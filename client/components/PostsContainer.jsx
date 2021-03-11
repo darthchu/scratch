@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { getPosts } from '../actions/actions';
 import Post from './Post.jsx';
 import PostForm from './PostForm.jsx';
 import Navbar from './Navbar.jsx';
+import socketIOClient from 'socket.io-client';
 
 const mapStateToProps = (state) => {
   //
@@ -21,9 +22,18 @@ class PostsContainer extends Component {
   constructor(props) {
     super(props);
   }
+
   componentDidMount() {
-    this.props.getPosts();
-  }
+     this.props.getPosts();
+}
+
+componentDidUpdate() {
+  const socket = socketIOClient('http://localhost:3000');
+  socket.on('new post', () => {
+    console.log('I heard you, geez');
+    this.props.getPosts()
+})
+}
 
   renderPosts() {
     if (Array.isArray(this.props.posts.posts)) {
@@ -40,6 +50,9 @@ class PostsContainer extends Component {
   }
 
   render() {
+
+    const socket = socketIOClient('http://localhost:3000');
+
     return (
       <center>
         <Navbar />

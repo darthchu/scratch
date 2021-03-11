@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component, useContext } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import socketIOClient from 'socket.io-client';
 import { updateTitle, updateBody, savePost } from '../actions/actions';
 
 const mapStateToProps = (state) => {
@@ -19,23 +20,28 @@ const mapDispatchToProps = (dispatch) => {
       if (!title || !body) return;
 
       dispatch(savePost(title, body, id));
+
     },
   };
 };
 
+
 class PostForm extends Component {
+
   render() {
     return (
       <center className="PostForm">
         <form
           onSubmit={(e) =>{
+            var socket= io()
             console.log(this.props);
             this.props.handleSubmit(
               e,
               this.props.newPostTitle,
               this.props.newPostBody,
-              this.props.user.id
+              this.props.user.id 
             )
+            socket.emit('new post', `emitting from PostForm: ${this.props.newPostBody}`);
           }
         }
         >

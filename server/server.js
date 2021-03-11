@@ -4,6 +4,13 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http, {
+  cors: {
+    origin: 'http://localhost:8080',
+    methods: ['GET', 'POST']
+  }
+});
 
 const authRouter = require('./routes/auth');
 const postsRouter = require('./routes/posts');
@@ -30,6 +37,26 @@ if (process.env.NODE_ENV === 'production') {
   );
 }
 
+/*
+Websocket
+*/
+
+io.on('connection', (socket) => {
+  //console.log('WebSocket connected');
+  socket.on('new post', (post) => {
+    console.log('server received the new post')
+    io.sockets.emit('new post', post)
+  })
+  socket.on('disconnect', () => {
+   // console.log('Websocket: bye, bitch');
+  });
+});
+
+
+/*
+Error Handling
+*/
+
 app.get('*', (req, res) => {
   return res.status(404).json();
 });
@@ -44,4 +71,6 @@ app.use((err, req, res, next) => {
   return res.status(error.status).json(error.message);
 });
 
-app.listen(3000);
+
+
+http.listen(3000, () => { console.log('Listening on 3000, bitches') });
