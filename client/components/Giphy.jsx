@@ -7,6 +7,7 @@ import {
 
 } from '@giphy/react-components'
 import React, { useContext } from 'react';
+import socketIOClient from 'socket.io-client';
 
 // the search experience consists of the manager and its child components that use SearchContext
 const SearchExperience = (props) => {
@@ -27,7 +28,9 @@ const Components = (props) => {
       <div style={{'visibility' : isVisible}}>
           <SearchBar/>
           <Grid key={searchKey} columns={3} width={800} fetchGifs={fetchGifs} noLink={true} onGifClick={(e) => {
-            handleGifPost(e, user.username, e.embed_url, user.id, 'gif')
+            var socket = io();
+            handleGifPost(e, user.username, e.embed_url, user.id, 'gif');
+            socket.emit('new post', `emitting Giphy`);
           }}/>
       </div>
   )
